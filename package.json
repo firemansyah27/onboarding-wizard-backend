@@ -34,6 +34,8 @@
   },
   "homepage": "https://github.com/yonathan06/fastify-typescript-starter#readme",
   "dependencies": {
+    "@fastify/cors": "^8.2.0",
+    "@fastify/http-proxy": "^8.4.0",
     "@sinclair/typebox": "^0.23.5",
     "ajv": "^8.11.2",
     "dotenv": "^16.0.3",
@@ -43,8 +45,8 @@
   },
   "devDependencies": {
     "@types/node": "^18.11.15",
-    "@typescript-eslint/eslint-plugin": "^5.45.0",
-    "@typescript-eslint/parser": "^5.45.0",
+    "@typescript-eslint/eslint-plugin": "^5.47.0",
+    "@typescript-eslint/parser": "^5.47.0",
     "esbuild": "^0.14.54",
     "eslint": "^8.28.0",
     "eslint-config-prettier": "^8.5.0",

@@ -16,6 +16,9 @@ const ConfigSchema = Type.Strict(
     LOG_LEVEL: Type.String(),
     API_HOST: Type.String(),
     API_PORT: Type.String(),
+    API_SECRET: Type.String(),
+    URL_ONBOARDING: Type.String(),
+    URL_CORE: Type.String(),
   })
 );
 
