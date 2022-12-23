@@ -41,7 +41,10 @@
     "dotenv": "^16.0.3",
     "env-schema": "^5.1.1",
     "fastify": "^4.10.2",
-    "fastify-plugin": "^3.0.1"
+    "fastify-axios": "^1.2.6",
+    "fastify-plugin": "^3.0.1",
+    "install": "^0.13.0",
+    "npm": "^9.2.0"
   },
   "devDependencies": {
     "@types/node": "^18.11.15",

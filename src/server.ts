@@ -2,6 +2,8 @@ import fastify from "fastify";
 import config from "./plugins/config.js";
 import proxy from "@fastify/http-proxy";
 import cors from "@fastify/cors";
+import fastifyAxios from "lib/fastify-axios.js";
+import routes from "routes/index.js";
 
 const server = fastify({
     ajv: {
@@ -36,6 +38,19 @@ await server.register(proxy, {
     prefix: "/onboarding", // optional
     http2: false, // optional
 });
+
+await server.register(fastifyAxios, {
+    clients: {
+        core: {
+            baseURL: `${process.env.URL_CORE}`,
+        },
+        onboarding: {
+            baseURL: `${process.env.URL_ONBOARDING}`,
+        },
+    },
+});
+
+await server.register(routes);
 await server.ready();
 
 export default server;
