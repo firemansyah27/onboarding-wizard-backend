@@ -24,12 +24,45 @@ const getProfileSetting = async (request: FastifyRequestType, reply: any) => {
                 data["accounting_setting"] = response.data;
                 reply.code(response.status).send(data);
             }
+        } else {
+            const data = {
+                status: response.data.error.status,
+                message: response.data.error.message,
+            };
+            reply.code(response.status).send(data);
         }
-        reply.code(response.status).send(response.data);
     } catch (err) {
-        console.log(err);
-        reply.code(500).send({ error: err });
+        const status = err.response?.data?.statusCode ? err.response?.data?.statusCode : 500;
+        const data = err?.response?.data ? err.response.data : { message: "Internal Server Error" };
+        reply.code(status).send(data);
     }
 };
 
-export { getProfileSetting };
+const login = async (request: FastifyRequestType, reply: any) => {
+    try {
+        const headers = {
+            "Content-Type": "application/json",
+        };
+        const config = {
+            headers,
+        };
+
+        let response = false;
+        response = await request.axios.core.post("/login", request.body, config);
+        if (isResponseSuccess(response && response.status)) {
+            reply.cookie("jwtToken", response.data.token).code(response.status).send(response.data);
+        } else {
+            const data = {
+                status: response.data.error.status,
+                message: response.data.error.message,
+            };
+            reply.code(response.status).send(data);
+        }
+    } catch (err) {
+        const status = err.response?.data?.statusCode ? err.response?.data?.statusCode : 500;
+        const data = err?.response?.data ? err.response.data : { message: "Internal Server Error" };
+        reply.code(status).send(data);
+    }
+};
+
+export { login, getProfileSetting };
